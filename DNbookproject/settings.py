@@ -20,8 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'l)_=05l01nmfun^$ymr=+fq!4zda-qim2@*6tnmss_26kh!04*'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'l)_=05l01nmfun^$ymr=+fq!4zda-qim2@*6tnmss_26kh!04*')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -131,14 +130,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 # S3 Storage
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'DNbookproject.asset_storage.MediaStorage'
 STATICFILES_STORAGE = 'DNbookproject.asset_storage.StaticStorage'
 
 # AWS Access
-AWS_ACCESS_KEY_ID = 'AKIAY7QYXHJ2KH27N6NP'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'dnbooktest'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_REGION = 'ap-northeast-2'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME,AWS_REGION)
 AWS_S3_OBJECT_PARAMETERS = {
@@ -147,14 +145,11 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_DEFAULT_ACL = 'public-read'
 AWS_LOCATION = 'static'
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-
-
-#STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')
 #STATIC_URL = '/static/'
+
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
-#    os.path.join(BASE_DIR, 'static'),
 ]
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
