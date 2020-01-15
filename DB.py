@@ -13,7 +13,7 @@ if __name__ == '__main__':
     phone_number=[]
     openhour=[]
     saup=[]
-    #img=[]
+    img=[]
 
     with open('bookDB.txt',"r",encoding='UTF8') as f:
         while True:
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             a[6]=a[6].replace(';','\n')
             openhour.append(a[6])
             saup.append(a[7])
-            #img.append(a[8])
+            img.append(a[8])
 
     for i in range(len(name)):
         BookStore.objects.create(
@@ -42,7 +42,7 @@ if __name__ == '__main__':
         phone_number=phone_number[i],
         openhour=openhour[i],
         saup=saup[i],)
-        #img='store/' + img[i])
+        img='store/' + img[i])
         
     store = []
     title = []

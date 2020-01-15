@@ -159,7 +159,8 @@ STATICFILES_DIRS = [
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+#MEDIA_URL = '/media/'
+MEDIA_URL = 'https://%s/media/' % (AWS_S3_CUSTOM_DOMAIN)
 
 # Heroku: Update database configuration from $DATABASE_URL. 
 import dj_database_url 
