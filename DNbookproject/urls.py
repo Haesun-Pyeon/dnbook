@@ -15,4 +15,4 @@ urlpatterns = [
     path('main/', include('main.urls')),
     path('others/', include('others.urls')),
     path('message/', include('message.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

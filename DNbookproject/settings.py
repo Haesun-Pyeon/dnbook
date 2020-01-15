@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l)_=05l01nmfun^$ymr=+fq!4zda-qim2@*6tnmss_26kh!04*'
-#SECREET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'l)_=05l01nmfun^$ymr=+fq!4zda-qim2@*6tnmss_26kh!04*')
+#SECRET_KEY = 'l)_=05l01nmfun^$ymr=+fq!4zda-qim2@*6tnmss_26kh!04*'
+SECREET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'l)_=05l01nmfun^$ymr=+fq!4zda-qim2@*6tnmss_26kh!04*')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,15 +131,36 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# S3 Storage
+MEDIAFILES_LOCATION = 'media'
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')
-STATIC_URL = '/static/'
+# AWS Access
+AWS_ACCESS_KEY_ID = 'AKIAY7QYXHJ2KH27N6NP'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'dnbooktest'
+AWS_REGION = 'ap-northeast-2'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME,AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'static'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+
+#STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')
+#STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    STATIC_DIR,
+#    os.path.join(BASE_DIR, 'static'),
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Heroku: Update database configuration from $DATABASE_URL. 
