@@ -41,7 +41,7 @@ if __name__ == '__main__':
         email=email[i],
         phone_number=phone_number[i],
         openhour=openhour[i],
-        saup=saup[i],)
+        saup=saup[i],
         img='store/' + img[i])
         
     store = []
