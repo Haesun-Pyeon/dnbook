@@ -131,10 +131,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 # S3 Storage
-MEDIAFILES_LOCATION = 'media'
-STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'DNbookproject.asset_storage.MediaStorage'
+STATICFILES_STORAGE = 'DNbookproject.asset_storage.StaticStorage'
 
 # AWS Access
 AWS_ACCESS_KEY_ID = 'AKIAY7QYXHJ2KH27N6NP'
