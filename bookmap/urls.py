@@ -13,4 +13,5 @@ urlpatterns = [
     path('store_edit/<int:bookstore_id>', views.store_edit, name='store_edit'),
     path('themamap/', views.themamap, name='themamap'),
     path('themadetail/<int:tag_id>', views.themadetail, name='themadetail'),
+    path('stamp/<int:bookstore_id>', views.stamp, name='stamp'),
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
 from django.contrib.auth.models import User
-from .models import BookStore, Scrap, Review, Tag, Crawling
+from .models import BookStore, Scrap, Review, Tag, Crawling, Stamp
 from main.models import Bossprofile
 from django.core import serializers
 import simplejson
@@ -52,6 +52,13 @@ def detail(request, bookstore_id):
     else:
         return render(request, 'storedetail.html', {'reviews':reviews,'rev' : rev, 'store' : store_detail, 'star_avg':star_avg, 'introduce':introduce, 'edit':edit, })
       
+def stamp(request, bookstore_id):
+    user = request.user
+    store = BookStore.objects.get(bookstore_id=bookstore_id)
+    stamp = Stamp(user=user, store=store, count=1)
+    stamp.save()
+    return redirect('storedetail',bookstore_id)
+
 def realmap(request):
     bookstores = BookStore.objects.all()
     addr = []
