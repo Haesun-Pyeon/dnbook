@@ -33,6 +33,11 @@ if __name__ == '__main__':
             img.append(a[8])
 
     for i in range(len(name)):
+        if img[i]:
+            temp = 'store/' + img[i]
+            img[i] = temp
+        else:
+            pass
         BookStore.objects.create(
         name=name[i],
         addr=addr[i],
@@ -42,7 +47,7 @@ if __name__ == '__main__':
         phone_number=phone_number[i],
         openhour=openhour[i],
         saup=saup[i],
-        img='store/' + img[i])
+        img=img[i])
         
     store = []
     title = []
