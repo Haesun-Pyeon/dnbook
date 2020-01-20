@@ -157,10 +157,9 @@
                         let coords = new kakao.maps.LatLng(result[0].y,result[0].x);
                         if (stamp_bounds.contain(coords)){
                             location.href="{%url 'stamp' store.bookstore_id %}";
-                            alert("스탬프 1개 적립 완료!");
                         }
                         else{
-                            alert("책방 근처로 가주세요!");
+                            alert("책방 근처에서 적립 가능합니다.");
                         }
                     };
 
@@ -168,7 +167,7 @@
             });
         }
     };
-
+    
     function addrStoN(address,title){ //주소를 위도경도로 변환후 마킹
         geocoder.addressSearch(address,function(result, status){
             if (status === kakao.maps.services.Status.OK){

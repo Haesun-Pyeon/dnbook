@@ -103,6 +103,7 @@
     let nameArr = {{ bsname | safe }};
     let pkArr = {{ pklist | safe }};
     var selectedifw=null;
+    var selectedmk=null;
     let bounds = new kakao.maps.LatLngBounds();
     //내위치 받아와서 이미지마커로 표시하기
     var imageSrc = 'https://myrealdomain.com/images/my-icon-5.png', // 마커이미지의 주소입니다    
@@ -114,15 +115,19 @@
                 lat=position.coords.latitude;
                 lon=position.coords.longitude;
                 var locPosition=new kakao.maps.LatLng(lat,lon);
-                let marker = new kakao.maps.Marker({
+                let cur_marker = new kakao.maps.Marker({
                         map: map,
                         position: locPosition,
                         clickable: false,
                         title: '현재위치',
                         image: markerImage
                 });
+                if (selectedmk){
+                    selectedmk.setMap(null);
+                }
+                selectedmk=cur_marker;
                 map.setCenter(locPosition);
-                map.setLevel(7,{animate: true});
+                map.setLevel(5,{animate: true});
             });
         };
     }

@@ -55,9 +55,27 @@ def detail(request, bookstore_id):
 def stamp(request, bookstore_id):
     user = request.user
     store = BookStore.objects.get(bookstore_id=bookstore_id)
-    stamp = Stamp(user=user, store=store, count=1)
-    stamp.save()
-    return redirect('storedetail',bookstore_id)
+    st = Stamp.objects.filter(user=user, store=store)
+    overlap = False
+    if (st):
+        for s in st:
+            d = str(s.created_at)
+            stamp_date = d.split()[0]
+            d = str(datetime.today())
+            today_date = d.split()[0]
+            if (stamp_date == today_date):
+                overlap = True
+                break
+            else:
+                pass
+        if overlap == True:
+            content="<script type='text/javascript'>alert('하루에 한 번만 적립 가능합니다.');history.back();</script>"
+            return HttpResponse(content)
+    if (st == None) or (overlap == False):
+        stamp = Stamp(user=user, store=store, count=1)
+        stamp.save()
+        content="<script type='text/javascript'>alert('스탬프 1개 적립 완료');history.back();</script>"
+        return HttpResponse(content)
 
 def realmap(request):
     bookstores = BookStore.objects.all()
