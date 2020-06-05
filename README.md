@@ -1,6 +1,6 @@
 # DNBOOK version 1
 - 독립서점, 독립출판물 정보 사이트 초기버전
-- [동네북 version 2](https://github.com/doewanju/real-dnb)
+- [동네북 version 2](https://github.com/Haesun-Pyeon/real-dnb)
 
 ## 스크린샷
 <div>
